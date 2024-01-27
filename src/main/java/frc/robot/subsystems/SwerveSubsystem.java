@@ -49,9 +49,9 @@ public class SwerveSubsystem extends SubsystemBase{
             Constants.DriveConstants.kBackRightAbsoluteEncoderOffsetRad, 
             Constants.DriveConstants.kBackRightAbsoluteEncoderReversed);
 
-    private final AHRS gyro = new AHRS(SPI.Port.kMXP);
+    //private final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
-    private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(Constants.DriveConstants.kSwerveKinematics, new Rotation2d(gyro.getAngle()), getModulePositions());
+    //private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(Constants.DriveConstants.kSwerveKinematics, new Rotation2d(gyro.getAngle()), getModulePositions());
     
     // Constructure
     public SwerveSubsystem(){
@@ -67,12 +67,12 @@ public class SwerveSubsystem extends SubsystemBase{
 
     // 重制陀螺儀
     public void zeroHeading(){
-        gyro.reset();
+
     }
 
     // 拿陀螺儀的值(鎖在360度內)
     public double getHeading(){
-        return Math.IEEEremainder(gyro.getAngle(), 360);
+        return 0;
     }
 
     // 拿取Rotation2D(從陀螺儀來)
@@ -82,7 +82,8 @@ public class SwerveSubsystem extends SubsystemBase{
 
     // 拿取Pose2d
     public Pose2d getPose(){
-        return odometer.getPoseMeters();
+    //    return odometer.getPoseMeters()
+        return null;
     }
 
     //
@@ -97,7 +98,7 @@ public class SwerveSubsystem extends SubsystemBase{
 
     //校正Odometry
     public void resetOdometry(Pose2d pose){
-        odometer.resetPosition(getRotation2d(), getModulePositions(), pose);
+        //odometer.resetPosition(getRotation2d(), getModulePositions(), pose);
     }
 
     public void stopModules(){
@@ -117,11 +118,11 @@ public class SwerveSubsystem extends SubsystemBase{
 
     @Override
     public void periodic(){
-        odometer.update(getRotation2d(), getModulePositions());
+    //    odometer.update(getRotation2d(), getModulePositions());
     }
 
     public void setPose(Pose2d pose){
-        odometer.resetPosition(getRotation2d(), getModulePositions(), pose);
+    //    odometer.resetPosition(getRotation2d(), getModulePositions(), pose);
     }
 
     public double[] getModuleAbsoluteEncoderRad(){
